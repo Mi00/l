@@ -252,13 +252,16 @@ class LazyAdmin
     select_all = $('#selection_all_ids').closest('.custom-check-box')
     if @all_selected()
       select_all.removeClass('unknown').addClass('checked')
+      data = {ids: 'all'}
     else if @any_selected()
       select_all.removeClass('checked').addClass('unknown')
+      data = {ids: @selected()}
     else
       select_all.removeClass('checked').removeClass('unknown')
+      data = {ids: @selected()}
 
     $('.submenu .selection a').each (idx, el) =>
-      data = {ids: @selected()}
+      console.log(data)
       href = $(el).attr('href').split(/[\?&]ids/, 1)[0]
       glue  = if href.indexOf('?') < 0 then '?' else '&'
 
